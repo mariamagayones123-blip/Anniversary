@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary My Love ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 6rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Home Section */
+        #home {
+            text-align: center;
+        }
+
+        .question-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .question-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .gif-container {
+            margin: 2rem 0;
+        }
+
+        .gif-container img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        button {
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .no-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.5);
+        }
+
+        /* Letter Content */
+        .letter-content {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .letter-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .letter-box h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .letter-box .message {
+            font-size: 1.2rem;
+            line-height: 2;
+            text-align: left;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .anniversary-years {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            min-width: 100px;
+        }
+
+        .countdown-item .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .countdown-item .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Music Player */
+        .music-player {
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .play-pause-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            color: #667eea;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-pause-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .song-info {
+            text-align: left;
+        }
+
+        .song-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .song-artist {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Content Sections */
+        .content-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 25px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin: 1rem;
+        }
+
+        .content-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-box h3 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .content-box p, .content-box li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .content-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-box li {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .content-box li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .content-box li::before {
+            content: "💕 ";
+            margin-right: 0.5rem;
+        }
+
+/* Section styling */
+#future {
+    padding: 50px 20px;
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+}
+
+#future h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+/* Grid layout: 2 columns */
+.future-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-items: center;
+}
+
+/* Individual item styling */
+.future-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 300px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.future-item:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.future-item h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.future-item p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .question-container {
+                padding: 2rem;
+            }
+
+            .question-container h1 {
+                font-size: 2rem;
+            }
+
+            .gif-container img {
+                width: 200px;
+                height: 200px;
+            }
+
+            button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .letter-box {
+                padding: 2rem;
+            }
+
+            .letter-box h1 {
+                font-size: 2rem;
+            }
+
+            .letter-box .message {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+
+            .anniversary-years {
+                font-size: 2rem;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                padding: 1rem;
+            }
+
+            .countdown-item .number {
+                font-size: 2rem;
+            }
+
+            .content-box {
+                padding: 1.5rem;
+            }
+
+            .content-box h2 {
+                font-size: 2rem;
+            }
+
+            .content-box p, .content-box li {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+            }
+
+            nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            section {
+                padding: 5rem 1rem 1rem;
+            }
+
+            .letter-box .message {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#remember">Remember</a></li>
+            <li><a href="#about-you">About You</a></li>
+            <li><a href="#future">Our Future</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div id="initialQuestion" class="question-container">
+            <h1>DO YOU LOVE ME?</h1>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Cute GIF">
+            </div>
+            <div class="button-container">
+                <button class="yes-btn" onclick="handleFirstYes()">YES</button>
+                <button class="no-btn" onclick="handleFirstNo()">NO</button>
+            </div>
+        </div>
+
+        <div id="sadQuestion" class="question-container" style="display: none;">
+            <h1>Are you sure?</h1>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif" alt="Sad GIF">
+            </div>
+            <div class="button-container">
+                <button class="yes-btn" onclick="closeWebsite()">YES</button>
+                <button class="no-btn" onclick="backToFirst()">NO</button>
+            </div>
+        </div>
+
+        <div id="letterContent" class="letter-content" style="display: none;">
+            <div class="letter-box">
+                <h1>Happy 4th year Anniversary <br> Mami Sennie💖</h1>
+                <div class="message">
+                    <p>My dearest love,</p>
+                    <p>Happy 4th year anniversary, mami Senn. I love you so much, sobra pa. Gusto kong malaman mo kung gaano ako kasaya at ka-grateful dahil ikaw ang kasama ko sa buhay. Hindi ko inakala na mula sa simpleng 
+                        pagkakagusto natin noon, mauuwi tayo sa ganito—tayo na, at heto na tayo ngayon, apat na taon na. Parang kailan lang sinabi ko na subukan natin kung magwo-work, at kung hindi man, at least sinubukan 
+                        natin. Pero look at us now… four years strong. Dahil sa’yo, natuto akong magmahal nang totoo. Hindi man ako perpekto, pero dahil sa’yo, mas natuto akong ayusin ang sarili ko at mahalin nang tama. 
+                        Salamat sa pagmamahal at sa pag-unawa mo sa akin. Sorry mami kung minsan sobrang busy ko. Busy lang talaga ako sa acads, hindi sa iba. Wala po akong ibang iniisip—ikaw lang talaga. Sa mga kaklase ko, 
+                        classmates lang talaga sila, wala nang iba. Ang goal ko lang sa school ay makapasa at matupad ang mga pangarap ko, hindi mag-fling o kung ano pa man.
+                        Kaya sana, huwag ka nang mag-overthink sa mga bagay na walang katotohanan. Ikaw lang, mami. Ikaw palagi.</p>
+                </div>
+
+                <div class="anniversary-years">
+                     4 YEARS TOGETHER
+                </div>
+
+                <div class="countdown" id="countdown"></div>
+
+                <div class="music-player">
+                    <button class="play-pause-btn" id="playPauseBtn" onclick="toggleMusic()">▶️</button>
+                    <div class="song-info">
+                        <div class="song-title">Stuck</div>
+                        <div class="song-artist">LANY</div>
+                    </div>
+                </div>
+                <audio id="bgMusic" loop>
+                    <!-- REPLACE THIS URL WITH YOUR MP3 LINK -->
+                    <source src="LANY - Stuck (Official Lyric Video).mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="story">
+        <div class="content-box">
+            <h2>💕 Our Story </h2>
+            
+            <h3>How We Met</h3>
+            <p>Simula nung nakita kita gusto ko makipag-friends sa'yo pero dahil ayaw mo hahahaha kinukulit kita mami not until na nagsawa me kaya tumigil ako makipag-friends sa'yo. Hindi ko inaasahan na magkakagusto ako sa'yo noon, napaka denial ko at first pero habang tumatagal ay hindi ko na napigilan kaya naman pinili kong magpaka layo, tinigilan ko na makipag-talk sa'yo.</p>
+            
+            <h3>Our First Date</h3>
+            <p>Natatandaan ko yung time na sa First date natin tinulungan mo pa'ko mag color2x sa Vandana activity ko sa arts ko wayback grade 10 palang ako sa RHS and that time gusto natin ng closure sa isa't isa para hindi tayo naiilang, nakakamiss 1st date natin na hanggang ngayon never ko yun kakalimutan.</p>
+        </div>
+    </section>
+
+    <!-- Always Remember Section -->
+    <section id="remember">
+        <div class="content-box">
+            <h2> 📝 Always Remember This</h2>
+            <ul>
+                <li>Mami huwag ka po mag o-overthink ng mag isa, I'm always here po to listen to you.</li>
+                <li>If may bad happened po sa'yo just tell me po okay? I'll listen po whatever it takes gagawa po ako ng time just to listen to your rants po hehehe</li>
+                <li>Even if na busy si me please po wag ka po mag overthink na baka may iba na ako, na baka may nagugustuhan na'kong iba, kasi WALA po talaga.</li>
+                <li>Huwag ka po magpapalipas ng gutom because magagalit si tita sa'yo sige ka?</li>
+                <li>Promise natin sa isa't isa na pareho tayong makakapagtapos sa college and si tita ang unang map-proud sa'ting dalawa dahil nakapagtapos na tayo.</li>
+                <li>Ano man mangyari mami hinding hindi po kita iiwan even if nagiging kumplikado kami ni mama ko</li>
+                <li>Huwag ka po mag think ng masama about sa'min ni A kasi friends lang po talaga kami mami at wala ng more than that po isty</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- All About You Section -->
+    <section id="about-you">
+        <div class="content-box">
+            <h2>✨ All About You </h2>
+            <ul>
+                <li>Napakabait mo maliban sa mga kupal na tao</li>
+                <li>Maunawain sa lahat lalo na sa'kin</li>
+                <li>Maganda/Poganda hehehehe</li>
+                <li>Maaasahan sa lahat ng bagay</li>
+                <li>Napaka selosa pero solid magmahal</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Our Future Section -->
+    <section id="future">
+        <div class="content-box">
+            <h2>🌟 Our Future</h2>
+            <div class="future-grid">
+                <div class="future-item">
+                    <h4>✈️ Dreams</h4>
+                    <p>We’ll explore the world together, make memories, and experience new adventures hand in hand.</p>
+                </div>
+                <div class="future-item">
+                    <h4>📋 Plans</h4>
+                <p>We plan to build our dreams together, set goals, and support each other in every step of life.</p>
+                </div>
+                <div class="future-item">
+                    <h4>💖 Promises</h4>
+                    <p>We promise to love, respect, and be there for each other through thick and thin.</p>
+                </div>
+                <div class="future-item">
+                    <h4>🤝 Togetherness</h4>
+                    <p>Through every high and low, we’ll be each other’s support, laugh together, and grow hand in hand.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth Navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                targetSection.classList.add('active');
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Anniversary Date: December 18, 2021
+        const startDate = new Date(2021, 11, 18); // December 18, 2021
+
+        function updateCountdown() {
+            const now = new Date();
+            const distance = now - startDate;
+
+            // Calculate total time together
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `
+                <div class="countdown-item">
+                    <span class="number">${days}</span>
+                    <span class="label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number">${hours}</span>
+                    <span class="label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number">${minutes}</span>
+                    <span class="label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number">${seconds}</span>
+                    <span class="label">Seconds</span>
+                </div>
+            `;
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        // Question Logic
+        function handleFirstYes() {
+            document.getElementById('initialQuestion').style.display = 'none';
+            document.getElementById('letterContent').style.display = 'block';
+            updateCountdown();
+        }
+
+        function handleFirstNo() {
+            document.getElementById('initialQuestion').style.display = 'none';
+            document.getElementById('sadQuestion').style.display = 'block';
+        }
+
+        function backToFirst() {
+            document.getElementById('sadQuestion').style.display = 'none';
+            document.getElementById('initialQuestion').style.display = 'block';
+        }
+
+        function closeWebsite() {
+            window.close();
+            setTimeout(() => {
+                document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 3rem; text-align: center;">😢 Goodbye...</div>';
+            }, 100);
+        }
+
+        // Music Player
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('playPauseBtn');
+            
+            if (music.paused) {
+                music.play();
+                btn.textContent = '⏸️';
+            } else {
+                music.pause();
+                btn.textContent = '▶️';
+            }
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            if (section.id !== 'home') {
+                observer.observe(section);
+            }
+        });
+    </script>
+</body>
+</html>
