@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Us — Since Dec 18, 2021</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf7f2;
+      --warm: #f3ede3;
+      --gold: #c9a96e;
+      --gold-light: #dfc99a;
+      --dark: #1a1612;
+      --mid: #5c4e3a;
+      --muted: #9c8b72;
+      --border: rgba(201,169,110,0.2);
+      --white: #ffffff;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--warm); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem;
+      background: rgba(250,247,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--mid);
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(201,169,110,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 20%, rgba(201,169,110,0.06) 0%, transparent 70%);
+    }
+    .hero-ornament {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--dark);
+      opacity: 0;
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.7s forwards;
+    }
+    .counter-wrap {
+      margin-top: 4rem;
+      display: flex; gap: 0; align-items: stretch;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.9s forwards;
+    }
+    .counter-item {
+      padding: 2rem 3rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+    }
+    .counter-item + .counter-item { border-left: none; }
+    .counter-num {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1;
+      display: block;
+    }
+    .counter-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      display: block;
+    }
+    .scroll-hint {
+      margin-top: 5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp 1s ease 1.2s forwards;
+    }
+    .scroll-line {
+      width: 1px; height: 60px; background: var(--gold-light);
+      margin: 0.8rem auto 0; opacity: 0.5;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .section-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--dark);
+    }
+    .section-title em { font-style: italic; }
+    .section-divider {
+      width: 40px; height: 1px;
+      background: var(--gold);
+      margin: 1.5rem 0 3rem;
+    }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.8rem 2rem;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--mid);
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    .btn:hover { background: var(--gold); color: var(--white); }
+    .btn-solid { background: var(--gold); color: var(--white); }
+    .btn-solid:hover { background: var(--mid); border-color: var(--mid); }
+    .btn-ghost { border-color: rgba(92,78,58,0.3); color: var(--muted); }
+    .btn-ghost:hover { border-color: var(--gold); background: transparent; color: var(--gold); }
+    .btn-sm { padding: 0.5rem 1.2rem; font-size: 0.62rem; }
+    .btn-icon { padding: 0.5rem 0.7rem; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(26,22,18,0.6);
+      backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      width: 90%; max-width: 560px;
+      max-height: 90vh; overflow-y: auto;
+      animation: fadeUp 0.3s ease;
+    }
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      color: var(--dark);
+    }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.2rem; color: var(--muted);
+    }
+    .modal { position: relative; }
+
+    /* ── FORMS ── */
+    .form-group { margin-bottom: 1.5rem; }
+    .form-label {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: var(--warm);
+      border: 1px solid var(--border);
+      padding: 0.8rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.3s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-actions { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem; }
+
+    /* ── MEMORIES GRID ── */
+    .memories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5px;
+    }
+    .memory-card {
+      background: var(--white);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .memory-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(201,169,110,0.12); }
+    .memory-card-date {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .memory-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .memory-card-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+    .memory-card-img {
+      width: 100%; aspect-ratio: 16/9;
+      object-fit: cover;
+      margin-bottom: 1.2rem;
+    }
+    .memory-category {
+      display: inline-block;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .memory-fav { position: absolute; top: 1.2rem; right: 1.2rem; color: var(--gold); }
+    .card-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      padding: 0 0 3rem 2.5rem;
+    }
+    .timeline-dot {
+      position: absolute; left: -2rem;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      top: 0.4rem;
+      transform: translateX(-4px);
+    }
+    .timeline-icon {
+      position: absolute; left: -2.8rem;
+      font-size: 1.2rem;
+      top: -0.2rem;
+    }
+    .timeline-date {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .timeline-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--dark);
+    }
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── LETTERS ── */
+    .letters-list { display: flex; flex-direction: column; gap: 1px; }
+    .letter-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 2rem;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .letter-card:hover { transform: translateX(4px); }
+    .letter-card.pinned { border-left: 3px solid var(--gold); }
+    .letter-meta { flex: 1; }
+    .letter-mood {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .letter-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--dark);
+    }
+    .letter-preview {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 400px;
+    }
+    .letter-date {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* ── LETTER READER ── */
+    .letter-reader { display: none; }
+    .letter-reader.active { display: block; }
+    .letter-content {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      line-height: 2;
+      color: var(--mid);
+      white-space: pre-wrap;
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      margin-top: 2rem;
+    }
+
+    /* ── BUCKET LIST ── */
+    .bucket-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+    }
+    .bucket-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.8rem;
+      transition: all 0.3s;
+    }
+    .bucket-item.done { opacity: 0.55; }
+    .bucket-item.done .bucket-dream { text-decoration: line-through; }
+    .bucket-check {
+      width: 22px; height: 22px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; margin-bottom: 1rem; transition: all 0.3s;
+      color: var(--gold); font-size: 0.8rem;
+    }
+    .bucket-check.checked { background: var(--gold); border-color: var(--gold); color: white; }
+    .bucket-dream {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .bucket-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .bucket-priority {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    footer .footer-heart {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--dark); color: var(--white);
+      padding: 1rem 1.5rem;
+      font-size: 0.8rem; letter-spacing: 0.05em;
+      transform: translateY(20px);
+      opacity: 0; transition: all 0.3s; z-index: 999;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center; padding: 4rem 2rem;
+      color: var(--muted);
+    }
+    .empty-state span {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      display: block; margin-bottom: 1rem;
+    }
+    .empty-state p { font-size: 0.85rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.9); }
+      50%       { opacity: 0.7; transform: scaleY(1); }
+    }
+    .fade-in { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+
+    /* ── LOADING ── */
+    .loading {
+      text-align: center; padding: 2rem;
+      font-size: 0.75rem; letter-spacing: 0.2em;
+      color: var(--muted); text-transform: uppercase;
+    }
+
+    /* ── CONFIRM DIALOG ── */
+    .confirm-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(26,22,18,0.5); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .confirm-overlay.active { display: flex; }
+    .confirm-box {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      text-align: center;
+      width: 90%; max-width: 380px;
+      animation: fadeUp 0.2s ease;
+    }
+    .confirm-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+    .confirm-msg { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; }
+    .confirm-actions { display: flex; gap: 1rem; justify-content: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      .counter-wrap { flex-direction: column; }
+      .counter-item + .counter-item { border-left: 1px solid var(--border); border-top: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .letter-preview { max-width: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">us, forever</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#memories">Memories</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#letters">Letters</a></li>
+    <li><a href="#bucket">Wishes</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <p class="hero-ornament">✦ Since December 18, 2021 ✦</p>
+  <h1 class="hero-title">You & <em>Me,</em><br>Always.</h1>
+  <p class="hero-sub">Happy Anniversary, my love</p>
+
+  <div class="counter-wrap">
+    <div class="counter-item">
+      <span class="counter-num" id="cnt-years">—</span>
+      <span class="counter-label">Years</span>
+    </div>
+    <div class="counter-item">
+      <span class="counter-num" id="cnt-months">—</span>
+      <span class="counter-label">Months</span>
+    </div>
+    <div class="counter-item">
+      <span class="counter-num" id="cnt-days">—</span>
+      <span class="counter-label">Days</span>
+    </div>
+    <div class="counter-item">
+      <span class="counter-num" id="cnt-total">—</span>
+      <span class="counter-label">Total Days</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    Scroll to explore our story
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MEMORIES -->
+<section id="memories">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">✦ Captured Moments</p>
+      <h2 class="section-title">Our <em>Memories</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <button class="btn btn-solid" onclick="openModal('memory-modal')">+ Add Memory</button>
+  </div>
+  <div class="memories-grid" id="memories-list">
+    <div class="loading">Loading memories...</div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">✦ Our Journey</p>
+      <h2 class="section-title">The <em>Milestones</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <button class="btn btn-solid" onclick="openModal('milestone-modal')">+ Add Milestone</button>
+  </div>
+  <div class="timeline" id="timeline-list">
+    <div class="loading">Loading timeline...</div>
+  </div>
+</section>
+
+<!-- LETTERS -->
+<section id="letters">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">✦ From the Heart</p>
+      <h2 class="section-title">Love <em>Letters</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:center">
+      <div id="letter-back" style="display:none">
+        <button class="btn btn-ghost btn-sm" onclick="closeLetterReader()">← Back</button>
+      </div>
+      <button class="btn btn-solid" onclick="openModal('letter-modal')">+ Write Letter</button>
+    </div>
+  </div>
+  <!-- List view -->
+  <div id="letters-list-view">
+    <div class="letters-list" id="letters-list">
+      <div class="loading">Loading letters...</div>
+    </div>
+  </div>
+  <!-- Reader view -->
+  <div id="letter-reader-view" class="letter-reader">
+    <div id="letter-mood-tag" class="section-tag"></div>
+    <h3 id="letter-reader-title" style="font-family:var(--font-serif);font-size:2rem;font-weight:300;color:var(--dark)"></h3>
+    <div class="letter-content" id="letter-reader-content"></div>
+    <div style="display:flex;gap:1rem;margin-top:1.5rem" id="letter-reader-actions"></div>
+  </div>
+</section>
+
+<!-- BUCKET LIST -->
+<section id="bucket">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">✦ Dreams Together</p>
+      <h2 class="section-title">Our <em>Bucket List</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <button class="btn btn-solid" onclick="openModal('bucket-modal')">+ Add Dream</button>
+  </div>
+  <div class="bucket-grid" id="bucket-list">
+    <div class="loading">Loading dreams...</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-heart">♡</span>
+  <p>Made with love, for the girl who made everything better.</p>
+  <p style="margin-top:0.5rem;font-size:0.65rem">Dec 18, 2021 — forever</p>
+</footer>
+
+<!-- ── MODALS ── -->
+
+<!-- Memory Modal -->
+<div class="modal-overlay" id="memory-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('memory-modal')">✕</button>
+    <h3 class="modal-title" id="memory-modal-title">New Memory</h3>
+    <input type="hidden" id="memory-id" />
+    <div class="form-group">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-input" id="mem-title" placeholder="What happened?" />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input type="date" class="form-input" id="mem-date" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select class="form-select" id="mem-category">
+          <option value="everyday">Everyday</option>
+          <option value="first">A First</option>
+          <option value="travel">Travel</option>
+          <option value="milestone">Milestone</option>
+          <option value="special">Special</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea class="form-textarea" id="mem-desc" placeholder="Tell the story..."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Photo URL (optional)</label>
+      <input type="text" class="form-input" id="mem-image" placeholder="https://..." />
+    </div>
+    <div class="form-group" style="display:flex;align-items:center;gap:1rem">
+      <label class="form-label" style="margin:0">Mark as Favorite</label>
+      <input type="checkbox" id="mem-fav" style="accent-color:var(--gold);width:16px;height:16px" />
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" onclick="closeModal('memory-modal')">Cancel</button>
+      <button class="btn btn-solid" onclick="saveMemory()">Save Memory</button>
+    </div>
+  </div>
+</div>
+
+<!-- Milestone Modal -->
+<div class="modal-overlay" id="milestone-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('milestone-modal')">✕</button>
+    <h3 class="modal-title" id="milestone-modal-title">New Milestone</h3>
+    <input type="hidden" id="milestone-id" />
+    <div class="form-group">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-input" id="ms-title" placeholder="Name this moment..." />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input type="date" class="form-input" id="ms-date" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Icon (emoji)</label>
+        <input type="text" class="form-input" id="ms-icon" placeholder="💕" maxlength="2" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea class="form-textarea" id="ms-desc" placeholder="What made this special?" style="min-height:80px"></textarea>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" onclick="closeModal('milestone-modal')">Cancel</button>
+      <button class="btn btn-solid" onclick="saveMilestone()">Save Milestone</button>
+    </div>
+  </div>
+</div>
+
+<!-- Letter Modal -->
+<div class="modal-overlay" id="letter-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('letter-modal')">✕</button>
+    <h3 class="modal-title" id="letter-modal-title">Write a Letter</h3>
+    <input type="hidden" id="letter-id" />
+    <div class="form-group">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-input" id="ltr-title" placeholder="Dear..." />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Mood</label>
+        <select class="form-select" id="ltr-mood">
+          <option value="romantic">Romantic</option>
+          <option value="sweet">Sweet</option>
+          <option value="funny">Funny</option>
+          <option value="grateful">Grateful</option>
+          <option value="apologetic">Apologetic</option>
+        </select>
+      </div>
+      <div class="form-group" style="display:flex;align-items:flex-end;padding-bottom:0.1rem">
+        <label style="display:flex;align-items:center;gap:0.7rem;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);cursor:pointer">
+          <input type="checkbox" id="ltr-pinned" style="accent-color:var(--gold);width:16px;height:16px" />
+          Pin this letter
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Your Message</label>
+      <textarea class="form-textarea" id="ltr-content" placeholder="Write from the heart..." style="min-height:200px"></textarea>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" onclick="closeModal('letter-modal')">Cancel</button>
+      <button class="btn btn-solid" onclick="saveLetter()">Send Letter</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bucket Modal -->
+<div class="modal-overlay" id="bucket-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('bucket-modal')">✕</button>
+    <h3 class="modal-title" id="bucket-modal-title">New Dream</h3>
+    <input type="hidden" id="bucket-id" />
+    <div class="form-group">
+      <label class="form-label">The Dream</label>
+      <input type="text" class="form-input" id="bkt-dream" placeholder="Something we'll do together..." />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea class="form-textarea" id="bkt-desc" placeholder="Why is this special?" style="min-height:80px"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Priority</label>
+      <select class="form-select" id="bkt-priority">
+        <option value="someday">Someday</option>
+        <option value="soon">Soon</option>
+        <option value="urgent">This Year!</option>
+      </select>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" onclick="closeModal('bucket-modal')">Cancel</button>
+      <button class="btn btn-solid" onclick="saveBucket()">Add to List</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Dialog -->
+<div class="confirm-overlay" id="confirm-overlay">
+  <div class="confirm-box">
+    <h3 class="confirm-title">Are you sure?</h3>
+    <p class="confirm-msg" id="confirm-msg">This cannot be undone.</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" onclick="cancelConfirm()">Cancel</button>
+      <button class="btn btn-solid" id="confirm-ok" onclick="doConfirm()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+const API = '';  // same origin
+let confirmCallback = null;
+let currentLetterId = null;
+
+// ── UTILS ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+
+function confirmDelete(msg, cb) {
+  document.getElementById('confirm-msg').textContent = msg;
+  confirmCallback = cb;
+  document.getElementById('confirm-overlay').classList.add('active');
+}
+function cancelConfirm() {
+  document.getElementById('confirm-overlay').classList.remove('active');
+  confirmCallback = null;
+}
+function doConfirm() {
+  document.getElementById('confirm-overlay').classList.remove('active');
+  if (confirmCallback) { confirmCallback(); confirmCallback = null; }
+}
+
+function fmtDate(d) {
+  if (!d) return '';
+  return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+// ── ANNIVERSARY COUNTER ──
+async function loadCounter() {
+  try {
+    const r = await fetch(`${API}/api/anniversary`);
+    const d = await r.json();
+    document.getElementById('cnt-years').textContent = d.years;
+    document.getElementById('cnt-months').textContent = d.months;
+    document.getElementById('cnt-days').textContent = d.days;
+    document.getElementById('cnt-total').textContent = d.totalDays.toLocaleString();
+  } catch(e) {
+    // Fallback JS calculation
+    const start = new Date('2021-12-18');
+    const now = new Date();
+    const diff = Math.floor((now - start) / 86400000);
+    document.getElementById('cnt-years').textContent = Math.floor(diff/365);
+    document.getElementById('cnt-months').textContent = Math.floor((diff%365)/30);
+    document.getElementById('cnt-days').textContent = diff%30;
+    document.getElementById('cnt-total').textContent = diff.toLocaleString();
+  }
+}
+
+// ── MEMORIES ──
+async function loadMemories() {
+  const el = document.getElementById('memories-list');
+  el.innerHTML = '<div class="loading">Loading memories...</div>';
+  try {
+    const r = await fetch(`${API}/api/memories`);
+    const data = await r.json();
+    if (!data.length) {
+      el.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span>No memories yet.</span><p>Start by adding your first moment together.</p></div>`;
+      return;
+    }
+    el.innerHTML = data.map(m => `
+      <div class="memory-card fade-in">
+        ${m.image_url ? `<img class="memory-card-img" src="${m.image_url}" alt="${m.title}" onerror="this.style.display='none'" />` : ''}
+        ${m.is_favorite ? '<span class="memory-fav">♥</span>' : ''}
+        <div class="memory-card-date">${fmtDate(m.date)}</div>
+        <div class="memory-card-title">${m.title}</div>
+        <div class="memory-card-desc">${m.description || ''}</div>
+        <span class="memory-category">${m.category}</span>
+        <div class="card-actions">
+          <button class="btn btn-ghost btn-sm" onclick="editMemory('${m.id}')">Edit</button>
+          <button class="btn btn-ghost btn-sm" onclick="deleteMemory('${m.id}', '${m.title.replace(/'/g,"\\'")}')">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    el.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span>Could not connect to server.</span><p>Make sure the backend is running.</p></div>`;
+  }
+}
+
+function openAddMemory() {
+  document.getElementById('memory-id').value = '';
+  document.getElementById('mem-title').value = '';
+  document.getElementById('mem-desc').value = '';
+  document.getElementById('mem-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('mem-image').value = '';
+  document.getElementById('mem-category').value = 'everyday';
+  document.getElementById('mem-fav').checked = false;
+  document.getElementById('memory-modal-title').textContent = 'New Memory';
+  openModal('memory-modal');
+}
+
+async function editMemory(id) {
+  const r = await fetch(`${API}/api/memories/${id}`);
+  const m = await r.json();
+  document.getElementById('memory-id').value = m.id;
+  document.getElementById('mem-title').value = m.title;
+  document.getElementById('mem-desc').value = m.description || '';
+  document.getElementById('mem-date').value = m.date?.split('T')[0] || '';
+  document.getElementById('mem-image').value = m.image_url || '';
+  document.getElementById('mem-category').value = m.category;
+  document.getElementById('mem-fav').checked = !!m.is_favorite;
+  document.getElementById('memory-modal-title').textContent = 'Edit Memory';
+  openModal('memory-modal');
+}
+
+async function saveMemory() {
+  const id = document.getElementById('memory-id').value;
+  const body = {
+    title: document.getElementById('mem-title').value.trim(),
+    description: document.getElementById('mem-desc').value.trim(),
+    date: document.getElementById('mem-date').value,
+    image_url: document.getElementById('mem-image').value.trim(),
+    category: document.getElementById('mem-category').value,
+    is_favorite: document.getElementById('mem-fav').checked,
+  };
+  if (!body.title || !body.date) { showToast('Please fill in title and date.'); return; }
+  const method = id ? 'PUT' : 'POST';
+  const url = id ? `${API}/api/memories/${id}` : `${API}/api/memories`;
+  await fetch(url, { method, headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  closeModal('memory-modal');
+  showToast(id ? 'Memory updated ✦' : 'Memory added ✦');
+  loadMemories();
+}
+
+function deleteMemory(id, title) {
+  confirmDelete(`Delete "${title}"?`, async () => {
+    await fetch(`${API}/api/memories/${id}`, { method: 'DELETE' });
+    showToast('Memory removed.');
+    loadMemories();
+  });
+}
+
+// ── MILESTONES ──
+async function loadMilestones() {
+  const el = document.getElementById('timeline-list');
+  el.innerHTML = '<div class="loading">Loading timeline...</div>';
+  try {
+    const r = await fetch(`${API}/api/milestones`);
+    const data = await r.json();
+    if (!data.length) {
+      el.innerHTML = `<div class="empty-state"><span>No milestones yet.</span></div>`;
+      return;
+    }
+    el.innerHTML = data.map(m => `
+      <div class="timeline-item fade-in">
+        <span class="timeline-icon">${m.icon || '💕'}</span>
+        <div class="timeline-date">${fmtDate(m.milestone_date)}</div>
+        <div class="timeline-title">${m.title}</div>
+        <div class="timeline-desc">${m.description || ''}</div>
+        <div class="card-actions" style="margin-top:0.8rem">
+          <button class="btn btn-ghost btn-sm" onclick="editMilestone('${m.id}')">Edit</button>
+          <button class="btn btn-ghost btn-sm" onclick="deleteMilestone('${m.id}', '${m.title.replace(/'/g,"\\'")}')">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    el.innerHTML = `<div class="empty-state"><span>Could not load.</span></div>`;
+  }
+}
+
+async function editMilestone(id) {
+  const r = await fetch(`${API}/api/milestones/${id}`);
+  const m = await r.json();
+  document.getElementById('milestone-id').value = m.id;
+  document.getElementById('ms-title').value = m.title;
+  document.getElementById('ms-desc').value = m.description || '';
+  document.getElementById('ms-date').value = m.milestone_date?.split('T')[0] || '';
+  document.getElementById('ms-icon').value = m.icon || '💕';
+  document.getElementById('milestone-modal-title').textContent = 'Edit Milestone';
+  openModal('milestone-modal');
+}
+
+async function saveMilestone() {
+  const id = document.getElementById('milestone-id').value;
+  const body = {
+    title: document.getElementById('ms-title').value.trim(),
+    description: document.getElementById('ms-desc').value.trim(),
+    milestone_date: document.getElementById('ms-date').value,
+    icon: document.getElementById('ms-icon').value || '💕',
+    color: '#c9a96e',
+  };
+  if (!body.title || !body.milestone_date) { showToast('Please fill in title and date.'); return; }
+  const method = id ? 'PUT' : 'POST';
+  const url = id ? `${API}/api/milestones/${id}` : `${API}/api/milestones`;
+  await fetch(url, { method, headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  closeModal('milestone-modal');
+  showToast(id ? 'Milestone updated ✦' : 'Milestone added ✦');
+  loadMilestones();
+}
+
+function deleteMilestone(id, title) {
+  confirmDelete(`Delete "${title}"?`, async () => {
+    await fetch(`${API}/api/milestones/${id}`, { method: 'DELETE' });
+    showToast('Milestone removed.');
+    loadMilestones();
+  });
+}
+
+// ── LETTERS ──
+async function loadLetters() {
+  const el = document.getElementById('letters-list');
+  el.innerHTML = '<div class="loading">Loading letters...</div>';
+  try {
+    const r = await fetch(`${API}/api/letters`);
+    const data = await r.json();
+    if (!data.length) {
+      el.innerHTML = `<div class="empty-state"><span>No letters yet.</span><p>Write something from the heart.</p></div>`;
+      return;
+    }
+    el.innerHTML = data.map(l => `
+      <div class="letter-card ${l.is_pinned ? 'pinned' : ''} fade-in" onclick="readLetter('${l.id}')">
+        <div class="letter-meta">
+          <div class="letter-mood">${l.is_pinned ? '📌 ' : ''}${l.mood}</div>
+          <div class="letter-title">${l.title}</div>
+          <div class="letter-preview">${l.content}</div>
+          <div class="letter-date">${fmtDate(l.created_at)}</div>
+        </div>
+        <div class="card-actions" onclick="event.stopPropagation()">
+          <button class="btn btn-ghost btn-sm" onclick="editLetter('${l.id}')">Edit</button>
+          <button class="btn btn-ghost btn-sm" onclick="deleteLetter('${l.id}', '${l.title.replace(/'/g,"\\'")}')">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    el.innerHTML = `<div class="empty-state"><span>Could not load.</span></div>`;
+  }
+}
+
+async function readLetter(id) {
+  const r = await fetch(`${API}/api/letters/${id}`);
+  const l = await r.json();
+  currentLetterId = id;
+  document.getElementById('letter-mood-tag').textContent = `✦ ${l.mood}`;
+  document.getElementById('letter-reader-title').textContent = l.title;
+  document.getElementById('letter-reader-content').textContent = l.content;
+  document.getElementById('letter-reader-actions').innerHTML = `
+    <button class="btn btn-ghost btn-sm" onclick="editLetter('${l.id}')">Edit</button>
+    <button class="btn btn-ghost btn-sm" onclick="deleteLetter('${l.id}', '${l.title.replace(/'/g,"\\'")}')">Delete</button>
+  `;
+  document.getElementById('letters-list-view').style.display = 'none';
+  document.getElementById('letter-reader-view').classList.add('active');
+  document.getElementById('letter-back').style.display = 'block';
+}
+
+function closeLetterReader() {
+  document.getElementById('letter-reader-view').classList.remove('active');
+  document.getElementById('letters-list-view').style.display = 'block';
+  document.getElementById('letter-back').style.display = 'none';
+  currentLetterId = null;
+}
+
+async function editLetter(id) {
+  const r = await fetch(`${API}/api/letters/${id}`);
+  const l = await r.json();
+  document.getElementById('letter-id').value = l.id;
+  document.getElementById('ltr-title').value = l.title;
+  document.getElementById('ltr-content').value = l.content;
+  document.getElementById('ltr-mood').value = l.mood;
+  document.getElementById('ltr-pinned').checked = !!l.is_pinned;
+  document.getElementById('letter-modal-title').textContent = 'Edit Letter';
+  openModal('letter-modal');
+}
+
+async function saveLetter() {
+  const id = document.getElementById('letter-id').value;
+  const body = {
+    title: document.getElementById('ltr-title').value.trim(),
+    content: document.getElementById('ltr-content').value.trim(),
+    mood: document.getElementById('ltr-mood').value,
+    is_pinned: document.getElementById('ltr-pinned').checked,
+  };
+  if (!body.title || !body.content) { showToast('Please fill in title and message.'); return; }
+  const method = id ? 'PUT' : 'POST';
+  const url = id ? `${API}/api/letters/${id}` : `${API}/api/letters`;
+  await fetch(url, { method, headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  // reset
+  document.getElementById('letter-id').value = '';
+  document.getElementById('ltr-title').value = '';
+  document.getElementById('ltr-content').value = '';
+  closeModal('letter-modal');
+  showToast(id ? 'Letter updated ✦' : 'Letter sent ✦');
+  if (currentLetterId) closeLetterReader();
+  loadLetters();
+}
+
+function deleteLetter(id, title) {
+  confirmDelete(`Delete "${title}"?`, async () => {
+    await fetch(`${API}/api/letters/${id}`, { method: 'DELETE' });
+    showToast('Letter removed.');
+    if (currentLetterId === id) closeLetterReader();
+    loadLetters();
+  });
+}
+
+// ── BUCKET LIST ──
+async function loadBucket() {
+  const el = document.getElementById('bucket-list');
+  el.innerHTML = '<div class="loading" style="grid-column:1/-1">Loading dreams...</div>';
+  try {
+    const r = await fetch(`${API}/api/bucket`);
+    const data = await r.json();
+    if (!data.length) {
+      el.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span>No dreams yet.</span><p>Add something you both want to do.</p></div>`;
+      return;
+    }
+    el.innerHTML = data.map(b => `
+      <div class="bucket-item ${b.is_done ? 'done' : ''} fade-in">
+        <div class="bucket-check ${b.is_done ? 'checked' : ''}" onclick="toggleBucket('${b.id}', ${!b.is_done}, ${JSON.stringify(b).replace(/"/g,"&quot;")})">${b.is_done ? '✓' : ''}</div>
+        <div class="bucket-dream">${b.dream}</div>
+        <div class="bucket-desc">${b.description || ''}</div>
+        <div class="bucket-priority">${b.priority}${b.is_done && b.done_date ? ' · Done '+fmtDate(b.done_date) : ''}</div>
+        <div class="card-actions" style="margin-top:0.8rem">
+          <button class="btn btn-ghost btn-sm" onclick="editBucket('${b.id}')">Edit</button>
+          <button class="btn btn-ghost btn-sm" onclick="deleteBucket('${b.id}', '${b.dream.replace(/'/g,"\\'")}')">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    el.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span>Could not load.</span></div>`;
+  }
+}
+
+async function toggleBucket(id, isDone, item) {
+  await fetch(`${API}/api/bucket/${id}`, {
+    method: 'PUT',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ ...item, is_done: isDone, done_date: isDone ? new Date().toISOString().split('T')[0] : null })
+  });
+  showToast(isDone ? 'Dream fulfilled! 🎉' : 'Marked as undone.');
+  loadBucket();
+}
+
+async function editBucket(id) {
+  const r = await fetch(`${API}/api/bucket`);
+  const all = await r.json();
+  const b = all.find(x => x.id === id);
+  if (!b) return;
+  document.getElementById('bucket-id').value = b.id;
+  document.getElementById('bkt-dream').value = b.dream;
+  document.getElementById('bkt-desc').value = b.description || '';
+  document.getElementById('bkt-priority').value = b.priority;
+  document.getElementById('bucket-modal-title').textContent = 'Edit Dream';
+  openModal('bucket-modal');
+}
+
+async function saveBucket() {
+  const id = document.getElementById('bucket-id').value;
+  const body = {
+    dream: document.getElementById('bkt-dream').value.trim(),
+    description: document.getElementById('bkt-desc').value.trim(),
+    priority: document.getElementById('bkt-priority').value,
+    is_done: false,
+  };
+  if (!body.dream) { showToast('Please enter a dream.'); return; }
+  const method = id ? 'PUT' : 'POST';
+  const url = id ? `${API}/api/bucket/${id}` : `${API}/api/bucket`;
+  if (id) {
+    // preserve done state
+    const r = await fetch(`${API}/api/bucket`);
+    const all = await r.json();
+    const existing = all.find(x => x.id === id);
+    if (existing) { body.is_done = existing.is_done; body.done_date = existing.done_date; }
+  }
+  await fetch(url, { method, headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  document.getElementById('bucket-id').value = '';
+  closeModal('bucket-modal');
+  showToast(id ? 'Dream updated ✦' : 'Dream added ✦');
+  loadBucket();
+}
+
+function deleteBucket(id, dream) {
+  confirmDelete(`Delete "${dream}"?`, async () => {
+    await fetch(`${API}/api/bucket/${id}`, { method: 'DELETE' });
+    showToast('Dream removed.');
+    loadBucket();
+  });
+}
+
+// ── CLOSE MODALS ON OVERLAY CLICK ──
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('active');
+  });
+});
+
+// ── RESET MODAL ON OPEN ──
+document.querySelector('[onclick="openModal(\'memory-modal\')"]')?.addEventListener('click', () => {
+  document.getElementById('memory-id').value = '';
+  document.getElementById('memory-modal-title').textContent = 'New Memory';
+});
+document.querySelector('[onclick="openModal(\'milestone-modal\')"]')?.addEventListener('click', () => {
+  document.getElementById('milestone-id').value = '';
+  document.getElementById('ms-title').value = '';
+  document.getElementById('ms-desc').value = '';
+  document.getElementById('ms-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('ms-icon').value = '💕';
+  document.getElementById('milestone-modal-title').textContent = 'New Milestone';
+});
+document.querySelector('[onclick="openModal(\'letter-modal\')"]')?.addEventListener('click', () => {
+  document.getElementById('letter-id').value = '';
+  document.getElementById('ltr-title').value = '';
+  document.getElementById('ltr-content').value = '';
+  document.getElementById('ltr-mood').value = 'romantic';
+  document.getElementById('ltr-pinned').checked = false;
+  document.getElementById('letter-modal-title').textContent = 'Write a Letter';
+});
+document.querySelector('[onclick="openModal(\'bucket-modal\')"]')?.addEventListener('click', () => {
+  document.getElementById('bucket-id').value = '';
+  document.getElementById('bkt-dream').value = '';
+  document.getElementById('bkt-desc').value = '';
+  document.getElementById('bkt-priority').value = 'someday';
+  document.getElementById('bucket-modal-title').textContent = 'New Dream';
+});
+
+// ── INIT ──
+loadCounter();
+loadMemories();
+loadMilestones();
+loadLetters();
+loadBucket();
+</script>
+</body>
+</html>
